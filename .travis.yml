@@ -1,18 +1,7 @@
-osx_image: xcode7.3
-
+osx_image: xcode8.2
 sudo: required
-dist: trusty
-
-language: c
 
 secure: "qstUrmc1DJBTPipbTJHPRqogWaaE4QJKiUyb08Oxi7d7OaIWEHwbLEaDFGJiU+OqI9WXwlmXxo5Nhx8rY5RnePhB3OghOcT4Umg062xzilaFsI6ObG5ZWJjKq1GVDlrKqZYPnNgQci6viICWDvFihk7J84cA7g1ioGKiCgj/TCBmpNBythV4asOfvmf8qLSTXI3yL8onlVMSDl5N8VJKB3mFrd3zp0P8Bvl7+GIpTwfDVcY6EI+JWp8o94nwsV5NR29L3Md0A7aNHknsp2pUa+/PyGAd2gREbpfKdVUTuskoTWfWNcplORGDQS9QFutUJVVJnKeDaZTbHK54XcIPGeTcb1Q/y7NvqGjFSTm/sUFqJ7jbdc/L0gNxzh8JkB3Plhpry4s40WVxsATlXyp2037R6qO2M0xYZmJXcRg+qaqKntEYPr3D1swgV0Stxb9ZC5zO8t4oN58z0/s8TjQi7/eynjVeWesAxc0eSojZN4TijZC6/KL+m/6Aw4Lc0WakmsvwE19x74RJ2x9gWCtYK6Xek3+wTJkyjt43eATq+i8bwY4/y2T/EHp0OBzW6GniWle5VbtOVOseKTCPf/ZqhfwcmCJth3N5pQgGMe2mmH2RMzqJTyPyeT9ODHN4zfncwVYuwGH8KnNGcv75RExm6MWJpuGzg/g2LUrNVc/xJks="
-
-matrix:
-  include:
-    - os: osx
-    - os: linux
-      env: CC=clang CXX=clang++ npm_config_clang=1
-      compiler: clang
 
 cache:
   directories:
@@ -21,17 +10,15 @@ cache:
   - $HOME/.electron
   - $HOME/.cache
 
-addons:
-  apt:
-    packages:
-      - libgnome-keyring-dev
-      - icnsutils
+before_install:
+- brew update
+- brew install node
+- brew install wine --without-x11
+- brew install mono
 
 install:
 - nvm install 6
-- npm install electron-builder@next
 - npm install
-- npm prune
 
 script:
 - npm run release
