@@ -8,7 +8,7 @@
   "scripts": {
     "start": "electron .",
     "build": "build -mw",
-    "release": "build -mw -p onTag"
+    "release": "build -mw -p onTagOrDraft"
   },
   "build": {
     "appId": "me.caumette.remi.dofustouchemu",
