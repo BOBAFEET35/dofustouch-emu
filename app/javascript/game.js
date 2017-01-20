@@ -1,11 +1,15 @@
 $(document).ready(() => {
     let isOnline = false;
 
+    Array.prototype.last = function () {
+        return this[this.length - 1];
+    };
+
     window.addEventListener('resize', () => window.gui._resizeUi());
 
     window.addEventListener('keydown', (event) => {
-        if (isOnline) {
-            switch (event.key.toUpperCase() && !window.gui.chat.active) {
+        if (isOnline && !window.gui.chat.active) {
+            switch (event.key.toUpperCase()) {
                 case 'C':
                     window.gui.menuBar._icons._childrenList.find((icon) => icon.id == 'Carac').tap();
                     event.preventDefault();
@@ -54,6 +58,16 @@ $(document).ready(() => {
                     window.gui.menuBar._icons._childrenList.find((icon) => icon.id == 'Achievement').tap();
                     event.preventDefault();
                     break;
+                case ' ':
+                    switch (window.gui.fightManager.fightState) {
+                        case window.gui.fightManager.FIGHT_STATES.PREPARATION:
+                            window.gui.timeline.infoAndFighters._childrenList.last()._childrenList.last()._fightReadyBtn.tap();
+                            break;
+                        case window.gui.fightManager.FIGHT_STATES.BATTLE:
+                            window.gui.fightManager.finishTurn();
+                            break;
+                    }
+                    break;
             }
         }
     });
@@ -62,7 +76,7 @@ $(document).ready(() => {
         isOnline = true;
 
         $(document).find('.shopBtn.Button').parent().hide();
-        document.title = "lol";
+        document.title = window.gui.playerData.characterBaseInformations.name;
     });
 
     window.gui.on('disconnect', () => {
