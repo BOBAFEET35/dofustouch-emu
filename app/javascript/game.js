@@ -60,8 +60,14 @@ $(document).ready(() => {
 
     window.gui.playerData.on('characterSelectedSuccess', () => {
         isOnline = true;
+
         $(document).find('.shopBtn.Button').parent().hide();
+        document.title = "lol";
     });
 
-    window.gui.on('disconnect', () => isOnline = true);
+    window.gui.on('disconnect', () => {
+        isOnline = false;
+
+        document.title = "DofusTouchEmu";
+    });
 });
