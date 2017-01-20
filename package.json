@@ -1,14 +1,25 @@
 {
   "name": "dofustouch-emu",
+  "description": "Emulateur dofus touch",
   "version": "1.0.0",
+  "private": true,
   "author": "Rémi Caumette <remi@caumette.me>",
   "main": "./main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "build -m",
+    "release": "build -mwl -p onTag"
+  },
+  "build": {
+    "appId": "me.caumette.remi.dofustouchemu",
+    "productName": "DofusTouchEmu"
   },
   "dependencies": {
-    "electron": "^1.4.13",
     "browser-es-module-loader": "^0.2.0",
     "jquery": "^3.1.1"
+  },
+  "devDependencies": {
+    "electron": "^1.4.13",
+    "electron-builder": "next"
   }
 }
