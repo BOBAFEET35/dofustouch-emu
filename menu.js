@@ -16,11 +16,20 @@ let menuTemplate = [
                 type: 'separator'
             },
             {
-                label: 'Outils de développeur',
+                label: 'Charger un script',
+                accelerator: 'CommandOrControl+S',
+                click (item, focusedWindow) {
+                    if (focusedWindow) {
+                        focusedWindow.webContents.send('load-script');
+                    }
+                }
+            },
+            {
+                label: 'Outil de développeur',
                 accelerator: process.platform === 'darwin' ? 'Alt+Command+I' : 'Ctrl+Shift+I',
                 click (item, focusedWindow) {
                     if (focusedWindow) {
-                        focusedWindow.webContents.toggleDevTools()
+                        focusedWindow.webContents.toggleDevTools();
                     }
                 }
             }

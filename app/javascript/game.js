@@ -1,9 +1,30 @@
+const {remote, ipcRenderer} = require('electron');
+
 $(document).ready(() => {
     let isOnline = false;
 
     Array.prototype.last = function () {
         return this[this.length - 1];
     };
+
+    ipcRenderer.on('load-script', () => {
+        if (window.hasScriptLoaded) {
+            remote.dialog.showErrorBox("Erreur !", "Un script est déjà chargé.");
+        }
+        else {
+            remote.dialog.showOpenDialog((files) => {
+                if (files != undefined) {
+                    let file = files[0];
+                    try {
+                        require(file)(window);
+                        window.hasScriptLoaded = true;
+                    } catch (err) {
+                        remote.dialog.showErrorBox("Impossible de charger le script !", err.message);
+                    }
+                }
+            });
+        }
+    });
 
     window.addEventListener('resize', () => window.gui._resizeUi());
 
@@ -84,4 +105,5 @@ $(document).ready(() => {
 
         document.title = "DofusTouchEmu";
     });
-});
+})
+;

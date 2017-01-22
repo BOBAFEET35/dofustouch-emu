@@ -11,5 +11,9 @@ $ npm install
 $ npm start
 ```
 
+## Fonctionnalités
+- Multi-Compte
+- Scripting
+
 ## Autre
 Actuellement, aucune release n'est disponible pour Linux. Vous devez donc faire l'installation depuis les sources.
