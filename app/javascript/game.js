@@ -8,7 +8,7 @@ $(document).ready(() => {
     window.addEventListener('resize', () => window.gui._resizeUi());
 
     window.addEventListener('keydown', (event) => {
-        if (isOnline && !window.gui.chat.active) {
+        if (isOnline && event.srcElement == document.body && !event.metaKey) {
             switch (event.key.toUpperCase()) {
                 case 'C':
                     window.gui.menuBar._icons._childrenList.find((icon) => icon.id == 'Carac').tap();
